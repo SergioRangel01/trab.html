@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balão e Bomba</title>
+    <style>
+        body {
+            background-color: #87CEEB;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        #balloon {
+            width: 100px;
+            transition: width 0.2s, height 0.2s;
+        }
+        #pump {
+            width: 50px;
+            margin-top: 20px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <img id="balloon" src="balloon.jpg" alt="Balão">
+    <img id="pump" src="pump.jpg" alt="Bomba">
+    <button onclick="pumpBalloon()">Encher Balão</button>
+    <audio id="explosionSound" src="explosion.mp3"></audio>
+    
+    <script>
+        let balloonSize = 100;
+        const maxSize = 300;
+
+        function pumpBalloon() {
+            balloonSize += 20;
+            if (balloonSize >= maxSize) {
+                const explosionSound = document.getElementById("explosionSound");
+                explosionSound.play();
+                document.getElementById("balloon").src = "explosion.jpg";
+                setTimeout(() => {
+                    document.getElementById("balloon").style.display = "none";
+                }, 500);
+            } else {
+                document.getElementById("balloon").style.width = balloonSize + "px";
+                document.getElementById("balloon").style.height = balloonSize * 1.2 + "px";
+            }
+        }
+    </script>
+</body>
+</html>
