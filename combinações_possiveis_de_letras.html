@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Combinações Únicas de Letras</title>
+    <script>
+        function combinacoesUnicas(letras) {
+            let resultados = [];
+
+            if (letras.length !== 3) {
+                console.error("Por favor, insira exatamente três letras.");
+                return resultados;
+            }
+
+            for (let i = 0; i < 3; i++) {
+                for (let j = 0; j < 3; j++) {
+                    if (j !== i) {
+                        for (let k = 0; k < 3; k++) {
+                            if (k !== i && k !== j) {
+                                resultados.push(letras[i] + letras[j] + letras[k]);
+                            }
+                        }
+                    }
+                }
+            }
+
+            return resultados;
+        }
+
+        function mostrarCombinacoes() {
+            let letras = document.getElementById('letras').value.trim().split('');
+            let resultadoDiv = document.getElementById('resultado');
+
+            if (letras.length !== 3) {
+                resultadoDiv.textContent = "Por favor, insira exatamente três letras.";
+                return;
+            }
+
+            let resultado = combinacoesUnicas(letras);
+            resultadoDiv.textContent = resultado.join(', ');
+        }
+    </script>
+</head>
+<body>
+    <h1>Combinações Únicas de Letras</h1>
+    <p>Insira três letras para gerar as combinações únicas:</p>
+    <input type="text" id="letras" placeholder="Insira três letras (ex: abc)">
+    <button onclick="mostrarCombinacoes()">Gerar Combinações</button>
+    <div id="resultado"></div>
+</body>
+</html>
